@@ -2,6 +2,8 @@
 
 A command line tool thats print a history of your [FLOW](https://www.onflow.org/) staking rewards (e.g. for tax purposes).
 
+![stakeout](https://user-images.githubusercontent.com/2547035/159144228-6513287c-3937-4cd4-b7da-27a919cbc982.gif)
+
 ## Install
 
 > :warning: This installation method only works for macOS and Linux.
