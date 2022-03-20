@@ -2,7 +2,7 @@
 
 A command line tool thats print a history of your [FLOW](https://www.onflow.org/) staking rewards (e.g. for tax purposes).
 
-![stakeout](https://user-images.githubusercontent.com/2547035/159144228-6513287c-3937-4cd4-b7da-27a919cbc982.gif)
+![stakeout](https://user-images.githubusercontent.com/2547035/159144265-e385a9d7-2aca-4bd5-9cc6-7b22a6343119.gif)
 
 ## Install
 
