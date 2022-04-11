@@ -37,6 +37,9 @@ get_architecture() {
         x86_64 | x86-64 | x64 | amd64)
             _cputype=x86_64
             ;;
+        arm64)
+            _cputype=arm64
+            ;;
         *)
             echo "unknown CPU type: $_cputype"
             return 1
