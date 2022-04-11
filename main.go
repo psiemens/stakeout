@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"time"
 
+	backoff "github.com/cenkalti/backoff/v4"
 	"github.com/machinebox/graphql"
 	"github.com/onflow/cadence"
 	"github.com/onflow/flow-go-sdk"
@@ -142,16 +143,42 @@ func getRewardsForEpoch(
 	txID string,
 	delegationRecords []DelegationRecord,
 ) []uint64 {
-	tx, err := c.GetTransactionResult(
-		ctx,
-		flow.HexToID(txID),
-		grpc.MaxCallRecvMsgSize(15000000),
-	)
+	tx, err := getTransactionResult(ctx, c, txID)
 	if err != nil {
 		panic(err)
 	}
 
 	return getDelegationRewards(tx.Events, delegationRecords)
+}
+
+func getTransactionResult(
+	ctx context.Context,
+	c *client.Client,
+	txID string,
+) (*flow.TransactionResult, error) {
+	var tx *flow.TransactionResult
+
+	getTransactionResult := func() error {
+		var err error
+
+		tx, err = c.GetTransactionResult(
+			ctx,
+			flow.HexToID(txID),
+			grpc.MaxCallRecvMsgSize(15000000),
+		)
+		if err != nil {
+			return err
+		}
+
+		return nil
+	}
+
+	err := backoff.Retry(getTransactionResult, backoff.NewExponentialBackOff())
+	if err != nil {
+		return nil, err
+	}
+
+	return tx, nil
 }
 
 const delegatorRewardsPaidEventType = "A.8624b52f9ddcd04a.FlowIDTableStaking.DelegatorRewardsPaid"
