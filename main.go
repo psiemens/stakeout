@@ -188,7 +188,11 @@ var epochs = []Epoch{
 	},
 	{
 		newDate(2022, time.April, 20),
-	  "c0a96fe2f03088dafd209ef35965c67965d0c5a323ee28eb0c91965535f4546e",
+		"c0a96fe2f03088dafd209ef35965c67965d0c5a323ee28eb0c91965535f4546e",
+	},
+	{
+		newDate(2022, time.April, 27),
+		"1e75bcd5b38b498b3eb622d11e6e65d2f315f1584ed8e6eb3164f85784f979d7",
 	},
 }
 
