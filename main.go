@@ -126,6 +126,78 @@ var epochs = []Epoch{
 		newDate(2021, time.December, 29),
 		"9dcc4fff71e99b94a3dd90a953ef024d0cd9928e76fff69394134b6ef841ae21",
 	},
+	{
+		newDate(2022, time.January, 5),
+		"ae25c41e18a798e565c9cc1d0ed4afe46bd75cad5b7ce04d92ec8515314d85b3",
+	},
+	{
+		newDate(2022, time.January, 12),
+		"c1541b18ddd377983be4eda812100fb4b4baf5face603e6616e0f7d0391f8ddb",
+	},
+	{
+		newDate(2022, time.January, 19),
+		"96e5ecf9943aecdacc40c5b99fd0163bc917997d9da341d62364593c0ea729b3",
+	},
+	{
+		newDate(2022, time.January, 26),
+		"27c4302f4ff4ea9d50ec8f368705f77e897d20f83212ce5e6e1c58ecb784e853",
+	},
+	{
+		newDate(2022, time.February, 2),
+		"e8d6f108901dfe67f89ea43e588e77e379bc465925dfb725bc07db5e665b0ab2",
+	},
+	{
+		newDate(2022, time.February, 9),
+		"ba593876491dc3a53a8a33dd2709c25ce474e84a9d4d228d4309e1a7945a2e71",
+	},
+	{
+		newDate(2022, time.February, 16),
+		"adc2c23f4a6e3c1bf2ba93d92adfc3dbbc7f9821226abb8576abf8f195d5a64e",
+	},
+	{
+		newDate(2022, time.February, 23),
+		"b8329b2c39141ec9ee2a0fc3ba1ab8372fabcac8864ba54bd39355df8df0c3ef",
+	},
+	{
+		newDate(2022, time.March, 2),
+		"ce5c402de62dbd6ccbe764739a6dae1187e751faf9a9179854eae31e9c9e4d26",
+	},
+	{
+		newDate(2022, time.March, 9),
+		"64a8781b0c6873d98ec30d5ef6ee296dcdddf93a8c2ec2e4378a6cfaea6b2631",
+	},
+	{
+		newDate(2022, time.March, 16),
+		"1f82f2b99296348450c9c7bd5da0a28b7d9b4d9b382c317aef1b782e22b324ca",
+	},
+	{
+		newDate(2022, time.March, 23),
+		"7b341be43ba69889f2ef37477c52b15c1ce18350815208a21f17728631dda1e0",
+	},
+	{
+		newDate(2022, time.March, 30),
+		"9941aac5fd7d280901fdda258388f455a9ec3d75bf910d1e161a7657f73e1c01",
+	},
+	{
+		newDate(2022, time.April, 6),
+		"1fd4282c4ba3194f6bcc6f90661649cf356da25186f4990f43e3ff7732486e7e",
+	},
+	{
+		newDate(2022, time.April, 13),
+		"99f684594fcb73a91b37ea5fcd9de5c2c51d4feac5a0a08a6d799ed7933928bc",
+	},
+	{
+		newDate(2022, time.April, 20),
+		"c0a96fe2f03088dafd209ef35965c67965d0c5a323ee28eb0c91965535f4546e",
+	},
+	{
+		newDate(2022, time.April, 27),
+		"1e75bcd5b38b498b3eb622d11e6e65d2f315f1584ed8e6eb3164f85784f979d7",
+	},
+	{
+		newDate(2022, time.May, 4),
+		"0b6a8f6b23949659338b7f68ee19aa4342ec104dbcf4148f7341e77cb192d0d7",
+	},
 }
 
 func newDate(year int, month time.Month, day int) time.Time {
@@ -281,7 +353,7 @@ func getDelegationRecords(ctx context.Context, address flow.Address) []Delegatio
 				}
 			}
 		}
-		
+
 		fragment AccountTransactionTableFragment on TransactionConnection {
 			edges {
 				node {
