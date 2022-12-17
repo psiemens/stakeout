@@ -16,7 +16,7 @@ import (
 )
 
 const accessAPI = "access.mainnet.nodes.onflow.org:9000"
-const flowscanAPI = "https://flowscan.org/query"
+const flowscanAPI = "https://query.flowgraph.co/?token=5a477c43abe4ded25f1e8cc778a34911134e0590"
 
 func main() {
 
@@ -41,7 +41,7 @@ func main() {
 	fmt.Printf("You have delegated to:\n")
 
 	for _, record := range delegationRecords {
-		fmt.Printf("- Node: %s (Delegator: %d)\n", record.NodeID, record.DelegatorID)
+		fmt.Printf("- Node: %s (Delegator: %d, Start Date: %s)\n", record.NodeID, record.DelegatorID, record.Time.Format("2006-01-02"))
 	}
 
 	fmt.Println()
@@ -335,6 +335,7 @@ func newDate(year int, month time.Month, day int) time.Time {
 type DelegationRecord struct {
 	NodeID      string
 	DelegatorID uint32
+	Time        time.Time
 }
 
 func getRewardsForEpoch(
@@ -423,12 +424,18 @@ func getDelegationRewards(
 	return rewards
 }
 
+type FlowscanPageInfo struct {
+	HasNextPage bool
+	EndCursor   string
+}
+
 type FlowscanTransactionResponse struct {
 	Account struct {
 		QueryResult struct {
-			Count int
-			Edges []struct {
+			PageInfo FlowscanPageInfo
+			Edges    []struct {
 				Node struct {
+					Time   string
 					Events struct {
 						Edges []struct {
 							Node struct {
@@ -449,6 +456,11 @@ func (r FlowscanTransactionResponse) DelegationRecords() []DelegationRecord {
 	records := make([]DelegationRecord, 0)
 
 	for _, tx := range r.Account.QueryResult.Edges {
+		timestamp, err := time.Parse(time.RFC3339, tx.Node.Time)
+		if err != nil {
+			panic(err)
+		}
+
 		for _, event := range tx.Node.Events.Edges {
 			fields := event.Node.Fields
 
@@ -460,6 +472,7 @@ func (r FlowscanTransactionResponse) DelegationRecords() []DelegationRecord {
 			record := DelegationRecord{
 				NodeID:      fields[0].Value,
 				DelegatorID: uint32(delegatorID),
+				Time:        timestamp,
 			}
 
 			records = append(records, record)
@@ -469,27 +482,60 @@ func (r FlowscanTransactionResponse) DelegationRecords() []DelegationRecord {
 	return records
 }
 
+func (r FlowscanTransactionResponse) GetPageInfo() FlowscanPageInfo {
+	return r.Account.QueryResult.PageInfo
+}
+
 func getDelegationRecords(ctx context.Context, address flow.Address) []DelegationRecord {
 	client := graphql.NewClient(flowscanAPI)
 
+	records := make([]DelegationRecord, 0)
+
+	pageInfo := FlowscanPageInfo{
+		HasNextPage: true,
+	}
+
+	for pageInfo.HasNextPage {
+		var newRecords []DelegationRecord
+		newRecords, pageInfo = getDelegationRecordsPage(ctx, client, address, pageInfo.EndCursor)
+
+		records = append(records, newRecords...)
+	}
+
+	return records
+}
+
+func getDelegationRecordsPage(
+	ctx context.Context,
+	client *graphql.Client,
+	address flow.Address,
+	afterCursor string,
+) ([]DelegationRecord, FlowscanPageInfo) {
+
 	req := graphql.NewRequest(`
-		query AccountTransactionsQuery($address: ID!, $role: TransactionRole, $limit: Int!, $offset: Int) {
+		query AccountTransactionsQuery($address: ID!, $role: TransactionRole, $first: Int!, $after: ID) {
 			account(id: $address) {
-				queryResult: transactions(first: $limit, skip: $offset, role: $role) {
-					count
+				queryResult: transactions(first: $first, after: $after, role: $role) {
 					...AccountTransactionTableFragment
 				}
 			}
 		}
 
 		fragment AccountTransactionTableFragment on TransactionConnection {
+			pageInfo {
+				hasNextPage
+				endCursor
+			}
 			edges {
 				node {
 					hash
 					time
-					events(first: 10, skip: 0, type: ["A.8624b52f9ddcd04a.FlowIDTableStaking.NewDelegatorCreated"]) {
+					events(typeId: "A.8624b52f9ddcd04a.FlowIDTableStaking.NewDelegatorCreated") {
 						edges {
 							node {
+								type {
+									id
+								}
 								fields
 							}
 						}
@@ -502,10 +548,12 @@ func getDelegationRecords(ctx context.Context, address flow.Address) []Delegatio
 
 	req.Var("address", "0x"+address.Hex())
 
-	// TODO: implement pagination
-	// currently it only scans the last 100 transactions on an account
-	req.Var("limit", 100)
-	req.Var("offset", 0)
+	// 50 is the maximum page size
+	req.Var("first", 50)
+
+	if afterCursor != "" {
+		req.Var("after", afterCursor)
+	}
 
 	var response FlowscanTransactionResponse
 
@@ -514,5 +562,5 @@ func getDelegationRecords(ctx context.Context, address flow.Address) []Delegatio
 		panic(err)
 	}
 
-	return response.DelegationRecords()
+	return response.DelegationRecords(), response.GetPageInfo()
 }
