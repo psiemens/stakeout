@@ -365,7 +365,7 @@ func getTransactionResult(
 		tx, err = c.GetTransactionResult(
 			ctx,
 			flow.HexToID(txID),
-			grpc.MaxCallRecvMsgSize(15000000),
+			grpc.MaxCallRecvMsgSize(20000000),
 		)
 		if err != nil {
 			return err
