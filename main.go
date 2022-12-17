@@ -198,6 +198,134 @@ var epochs = []Epoch{
 		newDate(2022, time.May, 4),
 		"0b6a8f6b23949659338b7f68ee19aa4342ec104dbcf4148f7341e77cb192d0d7",
 	},
+	{
+		newDate(2022, time.May, 11),
+		"34e207b07960c467213136b1d3b7e6a00e404b2ff312d2d2e764b3ec57e4e4fe",
+	},
+	{
+		newDate(2022, time.May, 18),
+		"9a0aaa02902cf71da5f62d5a19be2fc65e1987a4c265da8167ef56deac948d18",
+	},
+	{
+		newDate(2022, time.May, 25),
+		"327a0a26aa75107189da320655fc9978f96109917c1c3ade571dbada1d759adf",
+	},
+	{
+		newDate(2022, time.June, 1),
+		"8c5b29259f707c05e75018724d91ea644263567e8bc9f90b2a30d4bf6edb67fc",
+	},
+	{
+		newDate(2022, time.June, 8),
+		"5227c6b14ec518e96c78825eba41ca1b69a43de09e24e606ee95ea984d4db51b",
+	},
+	{
+		newDate(2022, time.June, 15),
+		"33e091751bcedf2b562d9f86e47602dcb5307a0e2ab7c08699d7a35592a2e78b",
+	},
+	{
+		newDate(2022, time.June, 22),
+		"fd044369db1be80ad9dcf8ba18d27ecdd85c0ec7728f142d875fb1620e711273",
+	},
+	{
+		newDate(2022, time.June, 29),
+		"69ee71740019a5a48b74880cc91ff3748adf1b732445ecdde0564ac939d81d93",
+	},
+	{
+		newDate(2022, time.July, 6),
+		"d7861b9657fd5bd2190bf963b4db1099e49a184efc64e12af96974679cc93773",
+	},
+	{
+		newDate(2022, time.July, 13),
+		"704df55da29d2e9c07159d95297541bbc3da5f6df4053271249db85a12751a35",
+	},
+	{
+		newDate(2022, time.July, 20),
+		"f27b1e86b5e38452ca5fb2afa339d58e3f3ad868439fb530280b19155e5db97e",
+	},
+	{
+		newDate(2022, time.July, 27),
+		"cbe00a365c296b6e4e970ab456a24902deb04e58d83274e725ee12a867f632cc",
+	},
+	{
+		newDate(2022, time.August, 3),
+		"e5d24eed4a1dc4f1a402dd418b01c82b4e4191cbfe4175caf4d0d60d16e29287",
+	},
+	{
+		newDate(2022, time.August, 10),
+		"1e1388869b3353418a47479bca467d5dfa536e3ceb2ee1d4d35c81db1247c513",
+	},
+	{
+		newDate(2022, time.August, 17),
+		"6a08f3a94f39bcee4dceced42ebad476cae08670d259842afb0b362a75c2d57b",
+	},
+	{
+		newDate(2022, time.August, 24),
+		"a62e18063fe03e4b155256703c850288dd83b631787f944f241de696d8f77d7f",
+	},
+	{
+		newDate(2022, time.August, 31),
+		"1fa3deaad2140ed5f0a6c7803061a8108b86faaa17176c2950bd61533c0b362b",
+	},
+	{
+		newDate(2022, time.September, 7),
+		"ddbfd2881dc2d868cda2a9915150a3b557879ad941b03e87c86e5af59a63045f",
+	},
+	{
+		newDate(2022, time.September, 14),
+		"4b7607da3004caafce8aa6934794d42de37dd9c9483110a78f6549f8490bf850",
+	},
+	{
+		newDate(2022, time.September, 21),
+		"3cd1c1057c3540a43d0bf953c618aa7719fc281ccf0c67be0c350cdbca19b960",
+	},
+	{
+		newDate(2022, time.September, 28),
+		"84314980f7f9ae4c5575113929b7ad5e43629b0b50aef9f973fbcfb11b6c6687",
+	},
+	{
+		newDate(2022, time.October, 5),
+		"6d3a9b2805ad038dafff23bf89dc8eeac94179f82d02eb7fd5efdc964ee4c7e6",
+	},
+	{
+		newDate(2022, time.October, 12),
+		"e8fe14c75f3c2edc7bfb95a7b0f83dff6e2c6135b3859ea01389797a61a72b52",
+	},
+	{
+		newDate(2022, time.October, 19),
+		"1ee173613f2ede3e9ebc451ee8d3023c793262483c1eb7dd6db69afa2bcc5c94",
+	},
+	{
+		newDate(2022, time.October, 26),
+		"343352434d18800b70985a585278fff9320569e4fa17c5416434986fc0d70ded",
+	},
+	{
+		newDate(2022, time.November, 2),
+		"3c04497d0a9632b6a180f5bdcb23552482001d87d8a56e97c195fcb0949a16cd",
+	},
+	{
+		newDate(2022, time.November, 9),
+		"2cf69ad8f735e98c5f2db62243d61538771616068b9a15cf2b53189a023485a8",
+	},
+	{
+		newDate(2022, time.November, 16),
+		"02f7ea39c662d4a6de0eb6c5a966f40d18e0a8cc7819faa62084b00bd9a1c14b",
+	},
+	{
+		newDate(2022, time.November, 23),
+		"9a81fbea1fe22e0908a116f514be7d65045f4eaab28bee2e98eb41a749e11d4a",
+	},
+	{
+		newDate(2022, time.November, 30),
+		"aa890ff09415b12005a0c233d09282abec26aaa8c42990259f3b4fc30d50f0d2",
+	},
+	{
+		newDate(2022, time.December, 7),
+		"ce338608fcbaeac42c2d394ba75d8544d4e82bfaff5c1972935c46fa23e08d52",
+	},
+	{
+		newDate(2022, time.December, 14),
+		"8724b273af8edf541ef886ec9a82a89ae48f9eb68f7ac6b82e52b8764138b912",
+	},
 }
 
 func newDate(year int, month time.Month, day int) time.Time {
