@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
-	"os"
 	"strconv"
 	"time"
 
@@ -20,7 +20,11 @@ const flowscanAPI = "https://query.flowgraph.co/?token=5a477c43abe4ded25f1e8cc77
 
 func main() {
 
-	args := os.Args[1:]
+	yearPtr := flag.Int("year", 0, "Filter results by this year")
+
+	flag.Parse()
+
+	args := flag.Args()
 
 	if len(args) != 1 {
 		fmt.Println("Pass your Flow address as an argument.\n\nExample:\n\nstakeout 0xe467b9dd11fa00df")
@@ -28,6 +32,8 @@ func main() {
 	}
 
 	address := flow.HexToAddress(args[0])
+
+	year := *yearPtr
 
 	c, err := client.New(accessAPI, grpc.WithInsecure())
 	if err != nil {
@@ -50,7 +56,7 @@ func main() {
 
 	grandTotal := uint64(0)
 
-	for _, epoch := range epochs {
+	for _, epoch := range filterEpochsByYear(epochs, year) {
 		epochRewards := getRewardsForEpoch(ctx, c, epoch.TxID, delegationRecords)
 
 		total := uint64(0)
@@ -330,6 +336,22 @@ var epochs = []Epoch{
 
 func newDate(year int, month time.Month, day int) time.Time {
 	return time.Date(year, month, day, 0, 0, 0, 0, time.UTC)
+}
+
+func filterEpochsByYear(epochs []Epoch, year int) []Epoch {
+	if year == 0 {
+		return epochs
+	}
+
+	results := make([]Epoch, 0)
+
+	for _, epoch := range epochs {
+		if epoch.Date.Year() == year {
+			results = append(results, epoch)
+		}
+	}
+
+	return results
 }
 
 type DelegationRecord struct {
