@@ -16,7 +16,7 @@ import (
 )
 
 const accessAPI = "access.mainnet.nodes.onflow.org:9000"
-const flowscanAPI = "https://query.flowgraph.co/?token=5a477c43abe4ded25f1e8cc778a34911134e0590"
+const flowscanAPI = "https://query.flowgraph.co/?token=7e11c53ae1f9cb4654408ebd2ba1fc4067613f3a"
 
 func main() {
 
