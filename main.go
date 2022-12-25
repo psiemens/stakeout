@@ -85,6 +85,78 @@ type Epoch struct {
 
 var epochs = []Epoch{
 	{
+		newDate(2020, time.December, 22),
+		"1ab22491777fb3c75333135c82b90a9f56ede8e0d18d43ecf6c5589d06353f95",
+	},
+	{
+		newDate(2020, time.December, 29),
+		"d7a8daca55dcadddd21dc9b63e71c515032584e9cf126b74744f676a1196e3c8",
+	},
+	{
+		newDate(2021, time.January, 5),
+		"9e377e6818d19b7a26d65b076120b2681d512111d397c617cac0843060437fc9",
+	},
+	{
+		newDate(2021, time.January, 12),
+		"29886f7cdbbb47b96dfa05ad277fcb3c8876c4ee32954269a926061aa4157af7",
+	},
+	{
+		newDate(2021, time.January, 19),
+		"83d585f3fa1368258cf317690e4bf82d4f841bfe2ccbc6c191838b73371b6e66",
+	},
+	{
+		newDate(2021, time.January, 26),
+		"487759099a09fc088943aac45909cca37d6b5bed418feab502ff37bd1b93346f",
+	},
+	{
+		newDate(2021, time.February, 2),
+		"c2f29629040ae6fca12e103f676bf112200f24f0fc8b4cb99c92f9287ce6195f",
+	},
+	{
+		newDate(2021, time.February, 9),
+		"e29a22e29297fcd8f67a030ae641405e14a889167a639f54b05f48fe1142bd5b",
+	},
+	{
+		newDate(2021, time.February, 16),
+		"d775735a1d9a8574faaa2b82b9dea0833d5bf48e43845c9c6bf5a42eb96414f2",
+	},
+	{
+		newDate(2021, time.February, 23),
+		"eed4f38fe4fec2bf9b60eba7708ff7d41fa654942ccc20cb1fc86872813f5b93",
+	},
+	{
+		newDate(2021, time.March, 2),
+		"3650b50994719480b8358a507afa30d58c232a30a6cfd947a94b62a78d25c849",
+	},
+	{
+		newDate(2021, time.March, 9),
+		"e4db187672cf545c865850840ff66d34c43cb298d8aae687c209c7f2fef44ea1",
+	},
+	{
+		newDate(2021, time.March, 16),
+		"2791557e2bdf4be66f69eeb919c5c3da94f2af4baf9c1e6953aedd887715bd7e",
+	},
+	{
+		newDate(2021, time.March, 23),
+		"15ac2d8ee73eae3483da10370dcc6f432d928d4631be22f8c7f0f85a8a62e1fd",
+	},
+	{
+		newDate(2021, time.March, 30),
+		"a60e812b005100290a4657f7022f1e2d3dc4745e25a0373b82d807c77471e069",
+	},
+	{
+		newDate(2021, time.April, 6),
+		"7674a088faa2b30ace3c798c2273face4e2b41970ca1990ad9d96a1bb7e2c2b2",
+	},
+	{
+		newDate(2021, time.April, 13),
+		"4addbcc17f8a5e9ecf1eb0d78a5c59332cde9d11ce347da676009284247565dd",
+	},
+	{
+		newDate(2021, time.April, 20),
+		"86917dcf3055d1aa21d898ccd4b8d1f55fd0924c7f5b7ce708dd92e69094e83d",
+	},
+	{
 		newDate(2021, time.April, 27),
 		"5c46cc3ff35a522d9439f26023e11a0f8697bf04b418e9e019a95ab3f49231ce",
 	},
