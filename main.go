@@ -18,66 +18,6 @@ import (
 const accessAPI = "access.mainnet.nodes.onflow.org:9000"
 const flowscanAPI = "https://query.flowgraph.co/?token=7e11c53ae1f9cb4654408ebd2ba1fc4067613f3a"
 
-func main() {
-
-	yearPtr := flag.Int("year", 0, "Filter results by this year")
-
-	flag.Parse()
-
-	args := flag.Args()
-
-	if len(args) != 1 {
-		fmt.Println("Pass your Flow address as an argument.\n\nExample:\n\nstakeout 0xe467b9dd11fa00df")
-		return
-	}
-
-	address := flow.HexToAddress(args[0])
-
-	year := *yearPtr
-
-	c, err := client.New(accessAPI, grpc.WithInsecure())
-	if err != nil {
-		panic(err)
-	}
-
-	ctx := context.Background()
-
-	delegationRecords := getDelegationRecords(ctx, address)
-
-	fmt.Printf("You have delegated to:\n")
-
-	for _, record := range delegationRecords {
-		fmt.Printf("- Node: %s (Delegator: %d, Start Date: %s)\n", record.NodeID, record.DelegatorID, record.Time.Format("2006-01-02"))
-	}
-
-	fmt.Println()
-
-	fmt.Printf("Rewards received:\n")
-
-	grandTotal := uint64(0)
-
-	for _, epoch := range filterEpochsByYear(epochs, year) {
-		epochRewards := getRewardsForEpoch(ctx, c, epoch.TxID, delegationRecords)
-
-		total := uint64(0)
-
-		for _, reward := range epochRewards {
-			total += reward
-		}
-
-		grandTotal += total
-
-		fmt.Printf(
-			"- %s: %s FLOW\n",
-			epoch.Date.Format("2006-01-02"),
-			cadence.UFix64(total),
-		)
-	}
-
-	fmt.Println()
-	fmt.Printf("Grand total: %s FLOW\n", cadence.UFix64(grandTotal))
-}
-
 type Epoch struct {
 	Date time.Time
 	TxID string
@@ -503,22 +443,108 @@ var epochs = []Epoch{
 	{
 		newDate(2022, time.December, 21),
 		"13398360d9064ca13b07fd3f737637e9eea17e2c8f720b6d7044eaee835dddaa",
+	},
+}
+
+func main() {
+
+	yearPtr := flag.Int("year", 0, "Filter by epochs in this year (e.g. 2022)")
+	startPtr := flag.String("start", "", "Filter by epochs after this date (e.g. 2021-04-27)")
+	endPtr := flag.String("end", "", "Filter by epochs before this date (e.g. 2021-04-27)")
+
+	flag.Parse()
+
+	args := flag.Args()
+
+	if len(args) != 1 {
+		fmt.Println("Pass your Flow address as an argument.\n\nExample:\n\nstakeout 0xe467b9dd11fa00df")
+		return
 	}
+
+	address := flow.HexToAddress(args[0])
+
+	year := *yearPtr
+
+	// Default start date is the first epoch defined above
+	defaultStartDate := epochs[0].Date
+
+	// Default end date is the current date
+	defaultEndDate := time.Now()
+
+	start := parseDate(*startPtr, defaultStartDate)
+	end := parseDate(*endPtr, defaultEndDate)
+
+	// If year flag is passed, set start and end dates to beginning and end of the year
+	if year != 0 {
+		start = newDate(year, time.January, 1)
+		end = newDate(year+1, time.January, 1)
+	}
+
+	c, err := client.New(accessAPI, grpc.WithInsecure())
+	if err != nil {
+		panic(err)
+	}
+
+	ctx := context.Background()
+
+	delegationRecords := getDelegationRecords(ctx, address)
+
+	fmt.Printf("You have delegated to:\n")
+
+	for _, record := range delegationRecords {
+		fmt.Printf("- Node: %s (Delegator: %d, Start Date: %s)\n", record.NodeID, record.DelegatorID, record.Time.Format("2006-01-02"))
+	}
+
+	fmt.Println()
+
+	fmt.Printf("Rewards received:\n")
+
+	grandTotal := uint64(0)
+
+	for _, epoch := range filterEpochs(epochs, start, end) {
+		epochRewards := getRewardsForEpoch(ctx, c, epoch.TxID, delegationRecords)
+
+		total := uint64(0)
+
+		for _, reward := range epochRewards {
+			total += reward
+		}
+
+		grandTotal += total
+
+		fmt.Printf(
+			"- %s: %s FLOW\n",
+			epoch.Date.Format("2006-01-02"),
+			cadence.UFix64(total),
+		)
+	}
+
+	fmt.Println()
+	fmt.Printf("Grand total: %s FLOW\n", cadence.UFix64(grandTotal))
 }
 
 func newDate(year int, month time.Month, day int) time.Time {
 	return time.Date(year, month, day, 0, 0, 0, 0, time.UTC)
 }
 
-func filterEpochsByYear(epochs []Epoch, year int) []Epoch {
-	if year == 0 {
-		return epochs
+func parseDate(v string, defaultDate time.Time) time.Time {
+	if v == "" {
+		return defaultDate
 	}
 
+	t, err := time.Parse("2006-01-02", v)
+	if err != nil {
+		panic(fmt.Sprintf("invalid date %s", v))
+	}
+
+	return t
+}
+
+func filterEpochs(epochs []Epoch, start, end time.Time) []Epoch {
 	results := make([]Epoch, 0)
 
 	for _, epoch := range epochs {
-		if epoch.Date.Year() == year {
+		if (epoch.Date.After(start) || epoch.Date.Equal(start)) && (epoch.Date.Before(end) || epoch.Date.Equal(end)) {
 			results = append(results, epoch)
 		}
 	}
