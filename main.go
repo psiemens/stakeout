@@ -85,6 +85,102 @@ type Epoch struct {
 
 var epochs = []Epoch{
 	{
+		newDate(2021, time.April, 27),
+		"5c46cc3ff35a522d9439f26023e11a0f8697bf04b418e9e019a95ab3f49231ce",
+	},
+	{
+		newDate(2021, time.May, 4),
+		"7c79febe209178851e4c6b0c1d9bf89955f89783ea8f9ace65e4c442ddd16e7d",
+	},
+	{
+		newDate(2021, time.May, 11),
+		"df60fda0991410b871b80437840e461ecd5b35decc6da201a1e5d62ae23b0cec",
+	},
+	{
+		newDate(2021, time.May, 18),
+		"a0ea12fe8166b3d3b10cb221cbc3dd236dba5990274e9a90c32e6a904f72d96f",
+	},
+	{
+		newDate(2021, time.May, 25),
+		"5a3093f7e577ba8e6dc3c6241c7b3a0c09d3068a91a684a477277d4f792e19da",
+	},
+	{
+		newDate(2021, time.June, 1),
+		"6e97bf58f0261bbf06733c7b225f56f32032dd974e73aa8c2c72e2fddd6ab4f9",
+	},
+	{
+		newDate(2021, time.June, 8),
+		"8d06b6d75fd315cdbe0caf035fb42b8503aef5f12b875fb18c38b9329cf10b83",
+	},
+	{
+		newDate(2021, time.June, 15),
+		"9b86013070876210c5ff04c5518d7698d21be2c3d4525cf985a82b311e7bb217",
+	},
+	{
+		newDate(2021, time.June, 22),
+		"207f908a7e949c1094dee63f71bf9f8487e07d8a2d904265b358ee03dc59441a",
+	},
+	{
+		newDate(2021, time.June, 29),
+		"f9cc19931aa131511951ff339dd3c454cdc7d956611cf0271e68c0ed50f6fca2",
+	},
+	{
+		newDate(2021, time.July, 6),
+		"406c3fe36fb4eb05cb3ba830cb0a8b66b6fc6d6f3d56e237eef201fe3b7b9821",
+	},
+	{
+		newDate(2021, time.July, 13),
+		"ade3ad62894c99798876b0c8fb9db84e978a14e23095944abcf76d614e5c018b",
+	},
+	{
+		newDate(2021, time.July, 20),
+		"51dab505c0bd843af3c3e43d5502cdc21c2f6dbb5765383b0a285f0578f859d4",
+	},
+	{
+		newDate(2021, time.July, 27),
+		"8730f4ff3552ca1e47777e51eda0169f49880bf49da19106839a8e20ae6bbec6",
+	},
+	{
+		newDate(2021, time.August, 3),
+		"d8a85bdd767f56a63bcb627bd74b1fe47f6e0d50b9c19b32c47895ca8373d208",
+	},
+	{
+		newDate(2021, time.August, 10),
+		"80366137eb2665d52480b6d9592decb11c98dcb38657633673173503d94db711",
+	},
+	{
+		newDate(2021, time.August, 17),
+		"38364caf7310ebac175d40fe99b9e3ac636eb0d370e9f647f92bb3fe938915ff",
+	},
+	{
+		newDate(2021, time.August, 24),
+		"4a6a3c043f22661d32a1b894e89744d2427f35dfe590d7f563665502afd03075",
+	},
+	{
+		newDate(2021, time.August, 31),
+		"109838b1910c72484e2789b5e60cfbab2e2a75da354b5e378397dae72f97e73e",
+	},
+	{
+		newDate(2021, time.September, 7),
+		"4bd3dc0284bfd077eb5eac7d39afd01df3e8125c45b07e2d3ea7e7e8512e09ef",
+	},
+	{
+		newDate(2021, time.September, 14),
+		"1746c7cf8e39e292c779a7891d788b4b8848b8ce5c8432007b7787fa262e286d",
+	},
+	{
+		newDate(2021, time.September, 21),
+		"b5f214c3284e15b8e13f178582db069350ace98a81e086461da5977050a70962",
+	},
+	{
+		newDate(2021, time.September, 28),
+		"a819c6ebd9bf8c969be0d43ce1f57a803c4fb4cba1e92ebd1de6403da73d426e",
+	},
+	{
+		newDate(2021, time.October, 5),
+		"10fd2d7642ec87e61a8222491297c9462c6fdc3d331662ff7115a0e1becb3e21",
+	},
+	{
 		newDate(2021, time.October, 12),
 		"8f2d439ba31c7824989977b4883a1f5bd59adc347ab9d2f62d07a6639f59bd67",
 	},
