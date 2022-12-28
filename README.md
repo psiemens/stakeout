@@ -30,18 +30,30 @@ _This installation method only works on Windows 10, 8.1, or 7 (SP1, with [PowerS
 
 ## Usage
 
+### List rewards from all epochs
+
 ```sh
 stakeout <address>
 ```
 
+### Filter rewards by year
+
+```sh
+stakeout -year=2022 <address>
+```
+
+### Filter rewards by start and end date
+
+```sh
+stakeout -start=2021-04-01 -end=2022-04-01 <address>
+```
+
 ## Current Limitations
 
-This tool is in beta and has some limitations. Open an issue if you want me to fix any of these! :smile:
+This tool has some limitations. Open an issue if you want me to fix either of these! :smile:
 
 - It only prints rewards from delegating, not staking.
-- It only searches the epochs from **October 12 to December 29, 2021**.
-- It may break for accounts with more than 100 transactions.
-- The pre-built binaries are only compatible with Linux and macOS.
+- It only searches the epochs up to **December 21, 2022**.
 
 ## Development
 
