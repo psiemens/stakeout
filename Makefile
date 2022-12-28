@@ -15,6 +15,7 @@ binaries:
 	$(MAKE) OS=linux ARCH=arm64 versioned-binary
 	$(MAKE) OS=darwin ARCH=amd64 ARCHNAME=x86_64 versioned-binary
 	$(MAKE) OS=darwin ARCH=arm64 versioned-binary
+	$(MAKE) OS=windows ARCH=amd64 ARCHNAME=x86_64 versioned-binary
 
 .PHONY: versioned-binary
 versioned-binary:
