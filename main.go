@@ -444,6 +444,10 @@ var epochs = []Epoch{
 		newDate(2022, time.December, 21),
 		"13398360d9064ca13b07fd3f737637e9eea17e2c8f720b6d7044eaee835dddaa",
 	},
+	{
+		newDate(2022, time.December, 28),
+		"c26e9d697be9f34d00514d354a87ea2e3750aed7f32f02e8cb3d9abc78bd09fe",
+	},
 }
 
 func main() {
