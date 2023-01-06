@@ -108,7 +108,7 @@ func main() {
 		grandTotal += total
 
 		fmt.Printf(
-			"%s, %s, %s\n",
+			"%s,%s,%s\n",
 			epoch.Time.Format("2006-01-02 15:04:05"),
 			epoch.TxID,
 			cadence.UFix64(total),
